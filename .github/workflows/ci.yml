@@ -1,4 +1,4 @@
-name: Build, Test, and Deploy to GitHub Pages
+name: .NET Core CI with Docker
 
 on:
   push:
@@ -14,42 +14,33 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-
+    
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v2
 
     - name: Setup .NET
-      uses: actions/setup-dotnet@v3
+      uses: actions/setup-dotnet@v2
       with:
-        dotnet-version: 6.0
+        dotnet-version: '6.0'
 
     - name: Restore dependencies
       run: dotnet restore
 
     - name: Build solution
-      run: dotnet build --no-restore
+      run: dotnet build --configuration Release
 
     - name: Run tests
-      run: dotnet test CalculatorTests/CalculatorTests.csproj --no-build
+      run: dotnet test --configuration Release
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
+    - name: Build Docker image
+      run: |
+        docker build -t calculator-app .
+    
+    - name: Run Docker container
+      run: |
+        docker run -d --name calculator-app-container calculator-app
 
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: 6.0
-
-    - name: Publish app
-      run: dotnet publish -c Release -o out
-
-    - name: Deploy to GitHub Pages
-      uses: actions/deploy-pages@v2
-      with:
-        publish_dir: ./out # Папка с сгенерированными статическими файлами
+    - name: Verify Docker container is running
+      run: |
+        docker ps -a
