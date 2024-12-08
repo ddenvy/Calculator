@@ -1,4 +1,7 @@
-name: .NET Core CI with Docker
+name: CI/CD Pipeline
+
+permissions:
+  id-token: write  # Разрешение для GITHUB_TOKEN
 
 on:
   push:
@@ -14,7 +17,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -37,3 +40,15 @@ jobs:
 
       - name: Run tests
         run: dotnet test CalculatorTests/CalculatorTests.csproj
+
+  deploy:
+    runs-on: ubuntu-latest  # Убедитесь, что используете правильную версию
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Deploy application
+        uses: actions/deploy-to-production@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          # Параметры деплоя без лишних параметров (например, publish_dir)
