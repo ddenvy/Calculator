@@ -1,7 +1,7 @@
 name: CI/CD Pipeline
 
 permissions:
-  id-token: write  # Разрешение для GITHUB_TOKEN
+  id-token: write  # Добавляем разрешение для GITHUB_TOKEN
 
 on:
   push:
@@ -42,13 +42,13 @@ jobs:
         run: dotnet test CalculatorTests/CalculatorTests.csproj
 
   deploy:
-    runs-on: ubuntu-latest  # Убедитесь, что используете правильную версию
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Deploy application
-        uses: actions/deploy-to-production@v1
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          # Параметры деплоя без лишних параметров (например, publish_dir)
+          artifact_name: "your-artifact-name"  # Указывайте допустимый параметр, например, имя артефакта
