@@ -16,31 +16,24 @@ jobs:
         os: [ubuntu-latest, macos-latest, windows-latest]
     
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v2
-      with:
-        dotnet-version: '6.0'
+      - name: Set up Docker
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y docker.io
 
-    - name: Restore dependencies
-      run: dotnet restore
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: '6.0'
 
-    - name: Build solution
-      run: dotnet build --configuration Release
+      - name: Restore dependencies
+        run: dotnet restore
 
-    - name: Run tests
-      run: dotnet test --configuration Release
+      - name: Build solution
+        run: dotnet build Calculator.sln
 
-    - name: Build Docker image
-      run: |
-        docker build -t calculator-app .
-    
-    - name: Run Docker container
-      run: |
-        docker run -d --name calculator-app-container calculator-app
-
-    - name: Verify Docker container is running
-      run: |
-        docker ps -a
+      - name: Run tests
+        run: dotnet test CalculatorTests/CalculatorTests.csproj

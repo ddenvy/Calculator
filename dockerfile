@@ -1,15 +1,23 @@
-# Указываем базовый образ .NET SDK
+# Используем официальный образ .NET SDK
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /app
 
-# Копируем все файлы проекта и выполняем сборку
+# Копируем все файлы проекта
 COPY . ./
-RUN dotnet publish Calculator/Calculator.csproj -c Release -o out
 
-# Указываем базовый образ .NET Runtime для запуска
+# Восстанавливаем зависимости
+RUN dotnet restore
+
+# Строим приложение
+RUN dotnet publish -c Release -o out
+
+# Используем официальный образ .NET runtime для выполнения
 FROM mcr.microsoft.com/dotnet/aspnet:6.0
 WORKDIR /app
 COPY --from=build /app/out .
 
-# Запуск приложения
-ENTRYPOINT ["dotnet", "Calculator.dll"]
+# Настроим переменную среды для приложения
+ENV ASPNETCORE_URLS=http://*:5000
+EXPOSE 5000
+
+ENTRYPOINT ["dotnet", "CalculatorApp.dll"]
