@@ -1,0 +1,5 @@
+C:\Users\envyd\IdeaProjects\CiCD\Calculator\out\Calculator.exe
+C:\Users\envyd\IdeaProjects\CiCD\Calculator\out\Calculator.dll
+C:\Users\envyd\IdeaProjects\CiCD\Calculator\out\Calculator.deps.json
+C:\Users\envyd\IdeaProjects\CiCD\Calculator\out\Calculator.runtimeconfig.json
+C:\Users\envyd\IdeaProjects\CiCD\Calculator\out\Calculator.pdb

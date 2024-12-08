@@ -1,4 +1,4 @@
-name: Build and Test
+name: Build, Test, and Deploy to GitHub Pages
 
 on:
   push:
@@ -9,8 +9,11 @@ on:
       - main
 
 jobs:
-  build-ubuntu:
-    runs-on: ubuntu-latest  # Это для Ubuntu
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
 
     steps:
     - name: Checkout code
@@ -30,8 +33,9 @@ jobs:
     - name: Run tests
       run: dotnet test CalculatorTests/CalculatorTests.csproj --no-build
 
-  build-macos:
-    runs-on: macos-latest  # Это для macOS
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
 
     steps:
     - name: Checkout code
@@ -42,32 +46,10 @@ jobs:
       with:
         dotnet-version: 6.0
 
-    - name: Restore dependencies
-      run: dotnet restore
+    - name: Publish app
+      run: dotnet publish -c Release -o out
 
-    - name: Build solution
-      run: dotnet build --no-restore
-
-    - name: Run tests
-      run: dotnet test CalculatorTests/CalculatorTests.csproj --no-build
-
-  build-windows:
-    runs-on: windows-latest  # Это для Windows
-
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
+    - name: Deploy to GitHub Pages
+      uses: actions/deploy-pages@v2
       with:
-        dotnet-version: 6.0
-
-    - name: Restore dependencies
-      run: dotnet restore
-
-    - name: Build solution
-      run: dotnet build --no-restore
-
-    - name: Run tests
-      run: dotnet test CalculatorTests/CalculatorTests.csproj --no-build
+        publish_dir: ./out # Папка с сгенерированными статическими файлами
