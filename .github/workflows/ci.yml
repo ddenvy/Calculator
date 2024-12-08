@@ -32,4 +32,4 @@ jobs:
       # Шаг 4: Публикуем Docker образ на Docker Hub
       - name: Push Docker image to Docker Hub
         run: |
-          docker push your-dockerhub-username/calculator-app:latest
+          docker push envydany/calculator-app:latest
