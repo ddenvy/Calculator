@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Br186tJh6eI=",
+  "dgSpecHash": "ZrViAP+yuVY=",
   "success": true,
-  "projectFilePath": "C:\\Users\\envyd\\IdeaProjects\\CiCD\\Calculator\\Calculator\\Calculator.csproj",
+  "projectFilePath": "c:\\Users\\envyd\\IdeaProjects\\CiCD\\Calculator\\Calculator\\Calculator.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\envyd\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.36\\microsoft.netcore.app.ref.6.0.36.nupkg.sha512",
     "C:\\Users\\envyd\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.36\\microsoft.windowsdesktop.app.ref.6.0.36.nupkg.sha512",

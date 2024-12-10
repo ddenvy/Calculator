@@ -1,3 +1,27 @@
+# Исключить папки сборки
 bin/
 obj/
-out/
+
+# Исключить файлы тестов
+CalculatorTests/
+
+# Исключить временные файлы и логи
+*.log
+*.tmp
+
+# Исключить файлы конфигурации IDE
+.vs/
+.vscode/
+
+# Исключить файлы Git
+.git/
+.gitignore
+
+# Исключить файлы Docker
+Dockerfile
+.dockerignore
+
+# Исключить файлы GitHub Actions
+.github/
+
+settings.json

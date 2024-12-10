@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "KRJHf6hmqVg=",
+  "dgSpecHash": "iUmusQ56uUg=",
   "success": true,
-  "projectFilePath": "C:\\Users\\envyd\\IdeaProjects\\CiCD\\Calculator\\CalculatorTests\\CalculatorTests.csproj",
+  "projectFilePath": "c:\\Users\\envyd\\IdeaProjects\\CiCD\\Calculator\\CalculatorTests\\CalculatorTests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\envyd\\.nuget\\packages\\microsoft.codecoverage\\17.12.0\\microsoft.codecoverage.17.12.0.nupkg.sha512",
     "C:\\Users\\envyd\\.nuget\\packages\\microsoft.net.test.sdk\\17.12.0\\microsoft.net.test.sdk.17.12.0.nupkg.sha512",
