@@ -56,5 +56,5 @@ jobs:
         run: docker push ${{ secrets.DOCKER_USERNAME }}/calculator-app:latest
 
       - name: Deploy to remote host
-        run: |
+        run: | 
           ssh ${{ secrets.REMOTE_HOST_USER }}@${{ secrets.REMOTE_HOST }} "docker pull ${{ secrets.DOCKER_USERNAME }}/calculator-app:latest && docker run -d --name calculator-app -p 80:80 ${{ secrets.DOCKER_USERNAME }}/calculator-app:latest"
