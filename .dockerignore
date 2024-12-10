@@ -2,13 +2,6 @@
 bin/
 obj/
 
-# Исключить файлы тестов
-CalculatorTests/
-
-# Исключить временные файлы и логи
-*.log
-*.tmp
-
 # Исключить файлы конфигурации IDE
 .vs/
 .vscode/
@@ -23,5 +16,3 @@ Dockerfile
 
 # Исключить файлы GitHub Actions
 .github/
-
-settings.json
